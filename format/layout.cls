@@ -1,9 +1,13 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{layout}
 
-\LoadClass{article}
+\LoadClass{book}
 \RequirePackage[margin=1in]{geometry}
 \RequirePackage{microtype}
-\RequirePackge{amsthm}
+\RequirePackage{amsthm}
 
 \RequirePackage{chapterbib}
+\RequirePackage{subfiles}
+
+\title{Applied Analysis}
+\author{A Collaborative Project}
