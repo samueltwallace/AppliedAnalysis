@@ -18,4 +18,6 @@ jobs:
       with:
         texlive-version: '2021'
         
+    - run: latexindent chapters/*.tex
+        
     - run: latexmk -lualatex main.tex
