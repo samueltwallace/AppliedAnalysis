@@ -1,0 +1,21 @@
+name: compile-whole-document
+
+on:
+  push:
+    branches: [ build ]
+
+jobs:
+  compile:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: action/checkout@v3
+      with:
+        ref: build
+    
+    - uses: action/checkout@v3
+      with:
+        texlive-version: '2021'
+        
+    - run: latexmk -lualatex main.tex
