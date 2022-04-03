@@ -112,11 +112,88 @@ And as we will see, convexity is not necessary, and in application, is too much 
 
 \section{Other Types of Convexity}
 
+Here we will explore other assumptions on $W$ that give lower--semicontinuity, but are not exactly our usual definition of convexity.
+These will be polyconvexity, quasiconvexity, and rank--one convexity.
+A natural question to ask is why these conditions are all thought of convexity.
+Our usual convexity is defined by an inequality on line segment in our relevant space: $W(tx + (1-t)y) \leq t W(x) + (1-t) W(y)$ for $t \in [0,1]$.
+Our exotic convexity conditions will have the same inequality, but the allowed segments in our condition will vary. \\
+
+Let's first give the canonical definition and relations of each form of convexity; these come from \cite{dacorogna_direct_2008}.
+Since we are interested in our material science problems, we are thinking of $W$ as a function on $\nabla y$, so we will consider $W$ a function on $n \times n$ matrices, $\mathbb{R}^{n^2}$.
 
 
+\begin{defn}[Polyconvexity]
+  $W$ is polyconvex if it can be written as a convex function of the determinants of the minors $M_{i_1, \ldots, i_k, j_1, \ldots, j_k}$ (the matrix formed by deleting the $i_1, \ldots, i_k$ columns and the $j_1, \ldots, j_k$ rows, $k < n$.
+  In a formula,
+  \begin{equation*}
+    W(M) = F( \set{\mathrm{det} M_{i_1, \ldots, i_k, j_i, \ldots, j_k}} )
+  \end{equation*}
+
+  Where $F$ is convex in its arguments.
+\end{defn}
+
+This is a generalization of convexity, but a little mysterious.
+Why determinants of minors submatrices?
+What makes them so special?
+
+\begin{defn}[Quasiconvexity]
+  $W$ is quasiconvex if for every $F \in \mathbb{R}^{n^2}$,
+  \begin{equation*}
+    w(F) \leq \frac{1}{\abs{U}} \int_U W(F + \nabla \varphi) dx
+  \end{equation*}
+
+  For all functions $\varphi \in W^{1,\infty}_0(U; \mathbb{R}^n)$ and all open bounded sets $U \subset \mathbb{R}^n$ (i.e. Lipschitz functions that vanish at the boundary of $U$).
+\end{defn}
+
+This is even more mysterious.
+There is no apparent relation to convexity in this definition. \\
+
+Finally,
+
+\begin{defn}[Rank--one Convexity]
+  $W$ is rank--one convex if for all matrices $F$ and $G$ with $\mathrm{rank}(F-G) \leq 1$, we have the convexity inequality:
+  \begin{equation*}
+    W(t F + (1-t) G) \leq t W(F) + (1-t) W(G)
+  \end{equation*}
+
+  For all $t \in [0,1]$.
+\end{defn}
+
+This at least looks like convexity, with a definiton incorporating values along segments; although the rank--one condition is still mysterious. \\
+
+Putting the mystery of the definitions to the side, we will relate our various notions of convexity, and some implications.
+
+\begin{lem}
+  The determinant function is rank--one convex and quasiconvex.
+  Moreover, determinants are rank--one affine (i.e. equality holds for all $t$ in the definition) and quasiaffine (i.e. equality holds in the definition).
+\end{lem}
+
+\begin{proof}
+  We work in the 2$\times$2 case and the rest follow by induction. \\
+
+  Let $F$ be a two--by--two matrix, with entries $f_{ij}$.
+  Then
+  \begin{equation*}
+  \end{equation*}
+\end{proof}
 
 
+\begin{thm}
+  $W$ is convex $\Rightarrow$ $W$ is polyconvex $\Rightarrow$ $W$ is quasiconvex $\Rightarrow$ $W$ is rank--one convex.
+\end{thm}
 
+\begin{proof}
+  $W$ convex certain implies polyconvex; we may use the one--by--one minor submatrices (i.e. the elements of the matrix) and then by varying each of these, convexity on $W$ implies convexity of our function of entries. \\
+
+  Now suppose $W$ is polyconvex.
+  Then
+
+  \begin{equation*}
+    \frac{1}{\abs{U}} \int_U W(M + \nabla \varphi) = \frac{1}{\abs{U}} \int_U F( \set{\mathrm{det}( M + \nabla \varphi)_{ij}} ) dx \geq F\left( \frac{1}{\abs{U}} \int_U \mathrm{det} (M + \nabla \varphi)_{ij} dx \right) 
+  \end{equation*}
+
+  
+\end{proof}
 
 
 \printbibliography
