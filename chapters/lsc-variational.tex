@@ -1,0 +1,50 @@
+\documentclass[../main.tex]{subfile}
+
+\addbibresource{../bibs/lsc-variational.bib}
+
+\begin{document}
+\chapter{Lower---Semicontinuity and Material Science}
+
+\emph{Contributed by Samuel Wallace\footnote{contact: \href{mailto:swalla24@uic.edu}{swalla24@uic.edu}}} \\
+
+Materials are most precisely characterized by their atomic arrangements.
+If you had perfectly accurate data on the positions and arrangements of atoms at any one particular time and if you had a very powerful computer, you could go ahead and calculate absolutely everything about an object of that material: electrical and magnetic properties, mechanical properties, and thermodynamic quantities.
+However, such a powerful computer and that data is far out of reach currently.
+Therefore to figure out properties of materials, we need a more feasible model. \\
+
+A well---studied model for materials is a continuum model.
+In this model, we assume a material is made of continuous ``stuff'' that entirely fills the space the object takes up, and this ``stuff'' has a more--or-less continuously distributed properties.
+Mathematically, the object is seen as an open set $\Omega \subset \mathbb{R}^n$, and various functions are defined on this set to represent the various properties. \\
+
+In this section, I'll be analyzing some mechanical properties of elastic objects through the continuum modeling lens.
+
+\section{Mathematical Modeling of Elastostatics and the Direct Method}
+
+Elastic materials are those that deform when forces are applied, and return to their initial state after the forces are removed.
+A model for elastic materials is the \emph{hyper---elastic} model: given a map $y: \Omega \to \mathbb{R}^3$ that represents the position and orientation of our material sample in space, we have a function $W: \mathrm{Mat}_{n\times n} \to \mathbb{R}$ so that $W(\nabla y(x))$ is the energy density of the deformation at a point $x$.
+We may then integrate this function over $\Omega$ to get the total energy of our deformation. \\
+
+A seemingly simple problem to analyze is how elastic objects deform when they are not moving; these are \emph{elastostatic} problems.
+The key modeling assumption is that these are global or local minimizers of the energy.
+The idea behind this assumption is that derivative of energy is forces, and if there were forces on this object it would move; so the derivative of energy must be zero. \\
+
+This explanation is heuristic, but can be justified, to various degrees, mathematically.
+For now, we will leave it as an assumption, but keep the result: our hope is to understand the quantity
+
+\begin{equation}
+  \label{eq:min-energy}
+  \min_{y: \Omega \to \mathbb{R}^n} \int_{\Omega}W( \nabla y) dx
+\end{equation}
+
+under some assumptions on $y$; for example, we could impose continuity or regularity assumptions, or boundary conditions, or applied forces, and so on.
+For our discussion now, we won't worry about which kind of restrictions we put on $y$, but we will make more abstract assumptions on the restrictions in relation to the outcome of the problem \eqref{eq:min-energy}.
+For example, we could ask that our restrictions give us a unique solution. \\
+
+How could we verify that an elastostatics problem has a minimizer?
+
+
+
+
+\printbibliography
+
+\end{document}
