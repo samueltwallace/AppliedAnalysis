@@ -33,15 +33,44 @@ For now, we will leave it as an assumption, but keep the result: our hope is to 
 
 \begin{equation}
   \label{eq:min-energy}
-  \min_{y: \Omega \to \mathbb{R}^n} \int_{\Omega}W( \nabla y) dx
+  \min_{y: \Omega \to \mathbb{R}^n} E(y) = \min_{y: \Omega \to \mathbb{R}^n} \int_{\Omega}W( \nabla y) dx
 \end{equation}
 
 under some assumptions on $y$; for example, we could impose continuity or regularity assumptions, or boundary conditions, or applied forces, and so on.
 For our discussion now, we won't worry about which kind of restrictions we put on $y$, but we will make more abstract assumptions on the restrictions in relation to the outcome of the problem \eqref{eq:min-energy}.
 For example, we could ask that our restrictions give us a unique solution. \\
 
-How could we verify that an elastostatics problem has a minimizer?
+How could we verify that an elastostatics problem has a minimizer? To do so, we'll introduce the Direct Method in the Calculus of Variations.
+This is a proof technique for showing existence of a global (i.e. over all allowed functions) minimizer  of a variational problem. \\
 
+The basic strategy to to the direct method is to take any sequence of functions whose energy approaches the minimum, show it converges in some relevant topology, and show the limit actually gets the minimum value.
+The convergence is usually gotten by choosing a coarser topology on the relevant functions, and the last step requires, at least, lower--semicontinuity of the integrand; for us, $W$.
+To see an example of its application, let's take a look at the classic direct method proof from \cite{evans_partial_2010}.
+Before that, we need a small, but significant result:
+
+\begin{lem}
+  If $W$ is a convex function on the set of matrices, then it is lower semi--continuous on $W^{1,p}(\Omega)$ in its weak topology for $1 < p < \infty$, where $W^{1,p}$ is a Sobolev space (cf. \ref{apdx:sobolev}).
+\end{lem}
+
+\begin{proof}
+  Let $y_k \harpoonarrowup y$ in $W^{1,p}(\Omega)$; we wish to show that $\liminf_{k \to \infty} E(y_k) \geq E(y)$.
+  Then it follows from Soboelv inequalities and Rellich--Kondrachov that $y_k \harpoonarrowup y$ strongly in $L^p$, and their gradients converge weakly in $L^p$. 
+  Because $W$ is convex, we have the pointwise inequality $W(\nabla y_k) - W(\nabla y) \geq  DW(\nabla y) \cdot (\nabla y_{k} - \nabla y)$, so that integrating,
+  \begin{equation*}
+    \int_{\Omega} W(\nabla y_k) \geq \int_{\Omega} W(\nabla y) dx + \int_{\Omega} DW ( \nabla y) \cdot (\nabla y_k - \nabla y) dx
+  \end{equation*}
+
+  And the last term goes to zero as $\nabla y_{k} \harpoonarrowup \nabla y$ in $L^p$.
+\end{proof}
+
+\begin{thm}
+  Assume the following on $W$:
+  \begin{itemize}
+  \item $W(F) \geq \alpha \abs{F}^q - \beta$ for some constant $\alpha, \beta > 0$ and $1 < p < \infty$
+  \item $W$ is a convex function,
+  \item The set of admissible functions are non--empty.
+  \end{itemize}
+\end{thm}
 
 
 
