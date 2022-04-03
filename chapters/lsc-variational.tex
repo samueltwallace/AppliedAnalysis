@@ -1,4 +1,4 @@
-\documentclass[../main.tex]{subfile}
+\documentclass[../main.tex]{subfiles}
 
 \addbibresource{../bibs/lsc-variational.bib}
 
@@ -46,6 +46,7 @@ This is a proof technique for showing existence of a global (i.e. over all allow
 The basic strategy to to the direct method is to take any sequence of functions whose energy approaches the minimum, show it converges in some relevant topology, and show the limit actually gets the minimum value.
 The convergence is usually gotten by choosing a coarser topology on the relevant functions, and the last step requires, at least, lower--semicontinuity of the integrand; for us, $W$.
 To see an example of its application, let's take a look at the classic direct method proof from \cite{evans_partial_2010}.
+We will take $n=1$ for simplicity, i.e. $y: \Omega \to \mathbb{R}$.
 Before that, we need a small, but significant result:
 
 \begin{lem}
@@ -53,24 +54,68 @@ Before that, we need a small, but significant result:
 \end{lem}
 
 \begin{proof}
-  Let $y_k \harpoonarrowup y$ in $W^{1,p}(\Omega)$; we wish to show that $\liminf_{k \to \infty} E(y_k) \geq E(y)$.
-  Then it follows from Soboelv inequalities and Rellich--Kondrachov that $y_k \harpoonarrowup y$ strongly in $L^p$, and their gradients converge weakly in $L^p$. 
+  Let $y_k \rightharpoonup y$ in $W^{1,p}(\Omega)$; we wish to show that $\liminf_{k \to \infty} E(y_k) \geq E(y)$.
+  Then it follows from Soboelv inequalities and Rellich--Kondrachov that $y_k \rightharpoonup y$ strongly in $L^p$, and their gradients converge weakly in $L^p$. 
   Because $W$ is convex, we have the pointwise inequality $W(\nabla y_k) - W(\nabla y) \geq  DW(\nabla y) \cdot (\nabla y_{k} - \nabla y)$, so that integrating,
   \begin{equation*}
     \int_{\Omega} W(\nabla y_k) \geq \int_{\Omega} W(\nabla y) dx + \int_{\Omega} DW ( \nabla y) \cdot (\nabla y_k - \nabla y) dx
   \end{equation*}
 
-  And the last term goes to zero as $\nabla y_{k} \harpoonarrowup \nabla y$ in $L^p$.
+  And the last term goes to zero as $\nabla y_{k} \rightharpoonup \nabla y$ in $L^p$.
 \end{proof}
 
 \begin{thm}
-  Assume the following on $W$:
+  Assume the following about the problem \eqref{eq:min-energy}:
   \begin{itemize}
-  \item $W(F) \geq \alpha \abs{F}^q - \beta$ for some constant $\alpha, \beta > 0$ and $1 < p < \infty$
-  \item $W$ is a convex function,
-  \item The set of admissible functions are non--empty.
+  \item $W(F) \geq \alpha \abs{F}^p - \beta$ for some constant $\alpha, \beta > 0$ and $1 < p < \infty$ (coercivity)
+  \item $W$ is a convex function, (convexity)
+  \item The set of admissible functions are non--empty and sequentially closed in the weak topology on $W^{1,p}(\Omega)$. (weak closure)
   \end{itemize}
+
+  Then the problem admits a map $y$ that takes on the minimum value; i.e. the minimum is achieved by a specific map.
+  In addition, if $W$ is strictly convex, then the minimizer is unique.
 \end{thm}
+
+\begin{proof}
+  First note that $E(y) \geq - \beta \abs{\Omega}$, so that the minimum is not $- \infty$.
+  Now choose a sequence of maps $y_k$ so that $E(y_k) \to \min E(y) = \mathcal{E}$.
+  Immediately from the first assumption on the problem, $E(y_k) \geq \int_{\Omega} \abs{\nabla y_k}^{p} dx - \beta$, so we then conclude $y_k$ is bounded in $W^{1,p}(\Omega)$, and Banach--Alaoglu, weakly precompact.
+  Thus we may extract a convergent subsequence, not relabeled, so that $y_k \to y$ strongly in $L^p(\Omega)$.
+  Since the admissible functions are weakly closed, the limit $y$ is also admissible, and since $W$ is convex and hence weakly lower--semicontinuous, we have that
+  \begin{equation*}
+    \mathcal{E} = \liminf_{k \to \infty} E(y_k) \geq E(y) \geq \mathcal{E}
+  \end{equation*}
+
+  So $E(y) = \mathcal{E}$. \\
+
+  To see uniqueness, assume $W$ is strictly convex.
+  Then suppose there $E(y_1) = E(y_2) = \mathcal{E}$.
+  Then $E((y_1+y_2)/2) < (E(y_1) + E(y_2))/2 = \mathcal{E}$, which contradicts the minimality of $E$ unless $y_1 = y_2$.
+\end{proof}
+
+Now we can see in a little more detail why the assumptions were necessary for the direct method, and what the strategy is for other problems:
+
+\begin{enumerate}
+\item Coercivity gives us norm bounds on the minimizing sequence in a function space, which allow us to transer to functional analytic statements about the sequence.
+\item We then pass to a compact subspace of our original space to claim convergence of a subsequence.
+\item Weak closure then says the limit of this convergent subsequence is valid for the problem we are addressing.
+\item Convexity implies lower--semicontinuity, which says our convergent subsequence actually gets to the minimum value without jumping up in a discontinuous way.
+\end{enumerate}
+
+
+All of these are important for the direct method to work, and can be modified to a variety of problems.
+However, not all of these assumptions are totally necessary for a minimizer to exist.
+In particular, convexity is a rather strong assumption to impose to conclude lower--semicontinuity.
+This isn't clear from our setup; in fact one can prove that for real--valued functions, convexity and lower--semicontinuity are equivalent.
+But we shouldn't be considering real--valued functions, we should be considering suitable maps $y: \Omega \to \mathbb{R}^n$ for $\Omega \subset \mathbb{R}^n$ and $n \geq 2$ for 3--dimensional objects!
+And as we will see, convexity is not necessary, and in application, is too much to ask for.
+
+\section{Other Types of Convexity}
+
+
+
+
+
 
 
 
