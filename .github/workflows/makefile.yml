@@ -16,6 +16,6 @@ jobs:
     
     - uses: xu-cheng/latex-action@v2
       with:
-        root-file: main.tex
+        root_file: main.tex
         latexmk_use_lualatex: true
         
