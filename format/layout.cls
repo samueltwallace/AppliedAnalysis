@@ -6,7 +6,6 @@
 \RequirePackage{microtype}
 \RequirePackage{amsthm}
 
-\RequirePackage{chapterbib}
 \RequirePackage{subfiles}
 
 \title{Applied Analysis}
