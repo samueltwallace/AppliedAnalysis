@@ -14,10 +14,8 @@ jobs:
       with:
         ref: build
     
-    - uses: actions/checkout@v3
+    - uses: xu-cheng/latex-action@v2
       with:
-        texlive-version: '2021'
+        root-file: main.tex
+        latexmk_use_lualatex: true
         
-    - run: latexindent chapters/*.tex
-        
-    - run: latexmk -lualatex main.tex
