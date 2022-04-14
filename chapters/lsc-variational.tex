@@ -172,9 +172,32 @@ Putting the mystery of the definitions to the side, we will relate our various n
   We work in the 2$\times$2 case and the rest follow by induction. \\
 
   Let $F$ be a two--by--two matrix, with entries $f_{ij}$.
+  Then if $\mathrm{rank}(F - \eta) \leq 1$, we can write $\eta = F + a \otimes b$ for vectors $a,b \in \mathbb{R}^n$.
   Then
-  \begin{equation*}
-  \end{equation*}
+  
+\begin{align*}
+  \mathrm{det} ( \lambda F + (1- \lambda) \eta) &= \mathrm{det} ( F + (1-\lambda) a \otimes b) \\
+                                 &= f_{11} f_{22} - f_{12}f_{21} + (1-\lambda) (f_{11} a_2b_2 + f_{22} a_1b_1 = f_{12} a_2b_1 - f_{21} a_1b_2) \\
+  &= \lambda \mathrm{det}(F) + (1-\lambda) \mathrm{det} (\eta)
+\end{align*}
+
+Thus $\mathrm{det}$ is rank-one affine. \\
+
+For quasiconvexity, note that for any function $\varphi \in C_0^2( U; \mathbb{R}^2)$,
+
+\begin{equation*}
+  \mathrm{det} ( \nabla \varphi) = \partial_1\varphi_1 \cdot \partial_2\varphi_2 - \partial_2\varphi_1 \cdot \partial_1 \varphi_2 = \partial_1 ( \varphi_1 \partial_2 \varphi_2) - \partial_2 ( \varphi_1 \partial_1 \varphi_2)
+\end{equation*}
+
+Where $\partial_i = \frac{\partial}{\partial x_i}$ and the $\varphi_i$ the components of the values of $\phi$.
+Then when we integrate this, we may integrate by parts to get
+
+\begin{equation*}
+  \int_U f_{11} \partial_2 \varphi_2 + f_{22} \partial_1 \varphi_1 - f_{12} \partial_1 \varphi_2 - f_{21} \partial_2 \varphi_1 + \mathrm{det} \nabla \varphi dx
+\end{equation*}
+
+adding $\left| D \right| \mathrm{det} (F)$ to both sides and rearranging, we get quasiconvexity.
+
 \end{proof}
 
 
@@ -183,14 +206,24 @@ Putting the mystery of the definitions to the side, we will relate our various n
 \end{thm}
 
 \begin{proof}
-  $W$ convex certain implies polyconvex; we may use the one--by--one minor submatrices (i.e. the elements of the matrix) and then by varying each of these, convexity on $W$ implies convexity of our function of entries. \\
 
-  Now suppose $W$ is polyconvex.
+  
+\begin{itemize}
+\item[($\Rightarrow$)]   $W$ convex certain implies polyconvex; we may use the one--by--one minor submatrices (i.e. the elements of the matrix) and then by varying each of these, convexity on $W$ implies convexity of our function of entries. 
+\item[($\Rightarrow$)] Now suppose $W$ is polyconvex.
   Then
 
-  \begin{equation*}
-    \frac{1}{\abs{U}} \int_U W(M + \nabla \varphi) = \frac{1}{\abs{U}} \int_U F( \set{\mathrm{det}( M + \nabla \varphi)_{ij}} ) dx \geq F\left( \frac{1}{\abs{U}} \int_U \mathrm{det} (M + \nabla \varphi)_{ij} dx \right) 
-  \end{equation*}
+  \begin{align*}
+    \frac{1}{\abs{U}} \int_U W(M + \nabla \varphi) &= \frac{1}{\abs{U}} \int_U F( \set{\mathrm{det}( M + \nabla \varphi)_{ij}} ) dx \\
+                                     &\geq F\left( \frac{1}{\abs{U}} \int_U \mathrm{det} (M + \nabla \varphi)_{ij} dx \right) \\
+    
+                                     &= F \left( \int_U \mathrm{det} (M) dx \right) = W(M) \\
+  \end{align*}
+
+  Where the inequality was gotten by Jensen's inequality.
+
+\end{itemize}
+
 
   
 \end{proof}
