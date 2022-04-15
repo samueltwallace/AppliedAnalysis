@@ -3,7 +3,7 @@ name: compile-whole-document
 on:
   pull_request:
     types:
-	- closed
+      - closed
 
 jobs:
   compile:
@@ -21,4 +21,4 @@ jobs:
       with:
         root_file: main.tex
         latexmk_use_lualatex: true
-	arg: "-halt-on-error -interaction=nonstopmode -outdir=./build"
+	args: "-halt-on-error -interaction=nonstopmode -outdir=./build"
