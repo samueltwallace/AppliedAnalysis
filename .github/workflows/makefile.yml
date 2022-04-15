@@ -3,7 +3,7 @@ name: compile-whole-document
 on:
   pull_request:
     types:
-	-closed
+	- closed
 
 jobs:
   compile:
