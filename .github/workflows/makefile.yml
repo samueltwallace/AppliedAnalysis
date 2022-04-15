@@ -1,11 +1,14 @@
 name: compile-whole-document
 
 on:
-  push:
-    branches: [ build ]
+  pull_request:
+    types:
+	-closed
 
 jobs:
   compile:
+
+    if: github.event.pull_request.merged == true
 
     runs-on: ubuntu-latest
 
@@ -18,4 +21,4 @@ jobs:
       with:
         root_file: main.tex
         latexmk_use_lualatex: true
-        
+	arg: "-halt-on-error -interaction=nonstopmode -outdir=./build"
