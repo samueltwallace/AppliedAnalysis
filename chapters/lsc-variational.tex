@@ -50,7 +50,7 @@ We will take $n=1$ for simplicity, i.e. $y: \Omega \to \mathbb{R}$.
 Before that, we need a small, but significant result:
 
 \begin{lem}
-  If $W$ is a convex function on the set of matrices, then it is lower semi--continuous on $W^{1,p}(\Omega)$ in its weak topology for $1 < p < \infty$, where $W^{1,p}$ is a Sobolev space (cf. \ref{apdx:sobolev}).
+  If $W$ is a convex and differentiable function on the set of matrices, then it is lower semi--continuous on $W^{1,p}(\Omega)$ in its weak topology for $1 < p < \infty$, where $W^{1,p}$ is a Sobolev space (cf. \ref{apdx:sobolev}).
 \end{lem}
 
 \begin{proof}
@@ -156,7 +156,7 @@ Finally,
     W(t F + (1-t) G) \leq t W(F) + (1-t) W(G)
   \end{equation*}
 
-  For all $t \in [0,1]$.
+  For all $t \in [0,1]$. We say that $F$ and $G$ are rank--one connected.
 \end{defn}
 
 This at least looks like convexity, with a definiton incorporating values along segments; although the rank--one condition is still mysterious. \\
@@ -181,7 +181,7 @@ Putting the mystery of the definitions to the side, we will relate our various n
   &= \lambda \mathrm{det}(F) + (1-\lambda) \mathrm{det} (\eta)
 \end{align*}
 
-Thus $\mathrm{det}$ is rank-one affine. \\
+Thus $\mathrm{det}$ is rank--one affine. \\
 
 For quasiconvexity, note that for any function $\varphi \in C_0^2( U; \mathbb{R}^2)$,
 
@@ -196,7 +196,7 @@ Then when we integrate this, we may integrate by parts to get
   \int_U f_{11} \partial_2 \varphi_2 + f_{22} \partial_1 \varphi_1 - f_{12} \partial_1 \varphi_2 - f_{21} \partial_2 \varphi_1 + \mathrm{det} \nabla \varphi dx
 \end{equation*}
 
-adding $\left| D \right| \mathrm{det} (F)$ to both sides and rearranging, we get quasiconvexity.
+adding $\left| U \right| \mathrm{det} (F)$ to both sides and rearranging, we get quasiconvexity.
 
 \end{proof}
 
@@ -216,11 +216,14 @@ adding $\left| D \right| \mathrm{det} (F)$ to both sides and rearranging, we get
   \begin{align*}
     \frac{1}{\abs{U}} \int_U W(M + \nabla \varphi) &= \frac{1}{\abs{U}} \int_U F( \set{\mathrm{det}( M + \nabla \varphi)_{ij}} ) dx \\
                                      &\geq F\left( \frac{1}{\abs{U}} \int_U \mathrm{det} (M + \nabla \varphi)_{ij} dx \right) \\
-    
-                                     &= F \left( \int_U \mathrm{det} (M) dx \right) = W(M) \\
+                                     &= F \left( \left\{ \int_U \mathrm{det} (M) dx \right\} \right) = W(M)
   \end{align*}
 
   Where the inequality was gotten by Jensen's inequality.
+  Thus $W$ is quasiconvex.
+
+  
+\item[($\Rightarrow$)] This involves a ``layering'' or stratification technique.
 
 \end{itemize}
 
