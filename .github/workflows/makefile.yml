@@ -7,18 +7,17 @@ on:
 
 jobs:
   compile:
-
     if: github.event.pull_request.merged == true
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
       with:
         ref: build
-    
+        
     - uses: xu-cheng/latex-action@v2
       with:
-        root_file: main.tex
-        latexmk_use_lualatex: true
-	args: "-halt-on-error -interaction=nonstopmode -outdir=./build"
+        pre_compile: "latexindent -w chapters/*.tex"
+	      root_file: main.tex
+	      latexmk_use_lualatex: true
+	      args: "-halt-on-error -interaction=nonstopmode -outdir=./build"
+	
