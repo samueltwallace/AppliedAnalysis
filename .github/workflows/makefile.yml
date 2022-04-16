@@ -16,9 +16,9 @@ jobs:
         ref: build 
     - name: compiling
       uses: xu-cheng/latex-action@v2
-	  with:
+      with:
       	root_file: main.tex
-		pre_compile: "latexindent -w chapters/*.tex"
-		args: "-halt-on-error -interaction=nonstopmode -outdir=./build"
-		latexmk_use_lualatex: true
+	pre_compile: "latexindent -w chapters/*.tex"
+	args: "-halt-on-error -interaction=nonstopmode -outdir=./build"
+	latexmk_use_lualatex: true
 		
