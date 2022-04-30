@@ -28,7 +28,7 @@ A seemingly simple problem to analyze is how elastic objects deform when they ar
 The key modeling assumption is that these are global or local minimizers of the energy.
 The idea behind this assumption is that derivative of energy is forces, and if there were forces on this object it would move; so the derivative of energy must be zero. \\
 
-This explanation is heuristic, but can be justified, to various degrees, mathematically.
+This explanation is heuristic, but can be justified, to various degrees, mathematically (see \cite{marsden1994mathematical}, the section on the 'Energy Criterion').
 For now, we will leave it as an assumption, but keep the result: our hope is to understand the quantity
 
 \begin{equation}
@@ -38,7 +38,7 @@ For now, we will leave it as an assumption, but keep the result: our hope is to 
 
 under some assumptions on $y$; for example, we could impose continuity or regularity assumptions, or boundary conditions, or applied forces, and so on.
 For our discussion now, we won't worry about which kind of restrictions we put on $y$, but we will make more abstract assumptions on the restrictions in relation to the outcome of the problem \eqref{eq:min-energy}.
-For example, we could ask that our restrictions give us a unique solution. \\
+For example, we could ask that our restrictions (somehow) give us a unique solution. \\
 
 How could we verify that an elastostatics problem has a minimizer? To do so, we'll introduce the Direct Method in the Calculus of Variations.
 This is a proof technique for showing existence of a global (i.e. over all allowed functions) minimizer  of a variational problem. \\
@@ -50,12 +50,13 @@ We will take $n=1$ for simplicity, i.e. $y: \Omega \to \mathbb{R}$.
 Before that, we need a small, but significant result:
 
 \begin{lem}
+	\label{lem:convexity-lsc}
 	If $W$ is a convex and differentiable function on the set of matrices, then it is lower semi--continuous on $W^{1,p}(\Omega)$ in its weak topology for $1 < p < \infty$, where $W^{1,p}$ is a Sobolev space (cf. \ref{apdx:sobolev}).
 \end{lem}
 
 \begin{proof}
 	Let $y_k \rightharpoonup y$ in $W^{1,p}(\Omega)$; we wish to show that $\liminf_{k \to \infty} E(y_k) \geq E(y)$.
-	Then it follows from Soboelv inequalities and Rellich--Kondrachov that $y_k \rightharpoonup y$ strongly in $L^p$, and their gradients converge weakly in $L^p$.
+	Then it follows from Sobolev inequalities and Rellich--Kondrachov that $y_k \rightharpoonup y$ strongly in $L^p$, and their gradients converge weakly in $L^p$.
 	Because $W$ is convex, we have the pointwise inequality $W(\nabla y_k) - W(\nabla y) \geq  DW(\nabla y) \cdot (\nabla y_{k} - \nabla y)$, so that integrating,
 	\begin{equation*}
 		\int_{\Omega} W(\nabla y_k) \geq \int_{\Omega} W(\nabla y) dx + \int_{\Omega} DW ( \nabla y) \cdot (\nabla y_k - \nabla y) dx
@@ -68,7 +69,7 @@ Before that, we need a small, but significant result:
 	Assume the following about the problem \eqref{eq:min-energy}:
 	\begin{itemize}
 		\item $W(F) \geq \alpha \abs{F}^p - \beta$ for some constant $\alpha, \beta > 0$ and $1 < p < \infty$ (coercivity)
-		\item $W$ is a convex function, (convexity)
+		\item $W$ satisfies the conditions of Lemma \ref{lem:convexity-lsc} , (convexity)
 		\item The set of admissible functions are non--empty and sequentially closed in the weak topology on $W^{1,p}(\Omega)$. (weak closure)
 	\end{itemize}
 
@@ -159,7 +160,7 @@ Finally,
 	For all $t \in [0,1]$. We say that $F$ and $G$ are rank--one connected.
 \end{defn}
 
-This at least looks like convexity, with a definiton incorporating values along segments; although the rank--one condition is still mysterious. \\
+This at least looks like convexity, with a definition incorporating values along segments; although the rank--one condition is still mysterious. \\
 
 Putting the mystery of the definitions to the side, we will relate our various notions of convexity, and some implications.
 
@@ -223,13 +224,38 @@ Putting the mystery of the definitions to the side, we will relate our various n
 			Thus $W$ is quasiconvex.
 
 
-		\item[($\Rightarrow$)] This involves a ``layering'' or stratification technique. 
+		\item[($\Rightarrow$)] This involves a ``layering'' or stratification technique.
+			Simply stated, we create a piecewise linear function $\varphi$ on almost all of our domain that oscillates between having gradients that are rank--one connected.
+			Then by integrating, we get a convex combination values that are at least the value of the convex combination. \\
 
+			In more detail, let $\xi, \eta$ be rank--one connected.
+			We can write $\xi - \eta = a \otimes \widehat{n}$, where $\widehat{n}$ is a unit vector.
+			Then choose a smooth, compactly supported $\psi$ with $\psi \equiv 1$ on $\overline{D} \Subset U$, and a Lipschitz function $\chi$ whose derivative takes the values only $0$ and $1$, on sets whose ratio is $\lambda/(1-\lambda)$. \\
+
+			We can then construct the function $\phi(x) = (1 - \lambda) (\xi - \eta) x - a \psi \chi(x \cdot \widehat{n})$, which vanishes outside of $\overline{D}$ and whose gradient takes values $\eta$ and $\xi$.
+			$\phi$ is clearly a $W^{1,\infty}_0(U)$ function whose gradients (by a simply computation) take the values $\xi$ and $\eta$, and by quasiconvexity of $W$, we have
+
+
+			\begin{align*}
+				\frac{1}{\left| U \right|} & \int_U W \left( \lambda \xi + (1- \lambda) \eta + \nabla \varphi \right) dx \\ = \frac{1}{\left| U \right|} & \left( \int_{\nabla \varphi = (\xi - \eta)} W(\xi) dx + \int_{\nabla \varphi = \eta} W(\eta) + \int_{\left\{ \nabla \varphi = \eta \right\} \cap \left\{ \nabla \varphi = \xi \right\}} W( \lambda \xi + (1- \lambda) \eta) dx  \right) \\
+				                           & \geq \lambda W(\xi) + (1- \lambda) W(\eta)
+			\end{align*}
+
+			And by taking the support of $\psi$ to eventually include all of $U$, we may drive the difference over the inequality to 0 (as the extra term scales with support of $\left| U \backslash \mathrm{supp} \psi \right|$.
+			We may also shrink $\Vert \varphi \Vert_{L^{\infty}(U)}$ so that we achieve $W(\lambda \xi + (1- \lambda) \eta)$ in the initial integrand.
 	\end{itemize}
 
-
-
 \end{proof}
+
+It's worth noting that because the determinant is the identity and all numbers are rank--one connected, all of these conditions are identical over $\mathbb{R}$.
+However, they are all distinct over higher dimensions of maps.
+This makes one-dimensional theory distinct from multi--dimensional theories, and it is what makes multi--dimensional variational problems interesting, at least from a existence point of view. \\
+
+It's also worth mentioning that all of these notions can be related to properties of sets in a rather uniform way: a set is $\alpha$--convex if there exists an $\alpha$--convex function that is negative on the set, and positive elsewhere, where $\alpha \in \left\{ \text{--, poly, quasi, rank--one} \right\}$.
+Consult \cite{dacorogna_direct_2008} for further information. \\
+
+Now we want to get back to our original question about existence and uniqueness of variational problems.
+
 
 
 \printbibliography
